@@ -105,6 +105,10 @@ Sets.prototype.reverse = function() {
   return (this.element = this.element.reverse(), this);
 }
 
+Sets.toSets = function(ele) {
+  return new Sets([ele])
+}
+
 Sets.join = function(set1, set2) {
   const ele = set2.element;
 
@@ -164,15 +168,16 @@ function unionSet(set1, set2) {
 
 
 const s1 = new Sets([1,2,3]);
-const s2 = new Sets([2,3,4,5]);
+const s2 = new Sets([2,3,4,5,8]);
 
 const s3 = new Sets([5,6,2])
 
-console.log(sortIntersectionSet(s1, s2), s3.sort());
+console.log(sortIntersectionSet(s1, s2), sortUnionSet(s1, s2));
 
 // 排序后的集合操作
 
 // adjoin
+// 练习 2.61
 function sortAdjoinSet(x, sortedSet) {
   if (x < sortedSet.first()) {
     return Sets.join(
@@ -190,13 +195,13 @@ function sortAdjoinSet(x, sortedSet) {
 
 // 交集
 function sortIntersectionSet(sortset1, sortset2) {
-  if (sortset1.isEmpty() || sortset2.isEmpty()) return new Sets([]);
+  if (sortset1.isEmpty() || sortset2.isEmpty()) return Sets.toSets();
 
   const firstA = sortset1.first(), firstB = sortset2.first();
 
   if (firstA === firstB) {
     return Sets.join(
-      new Sets([firstA]),
+      Sets.toSets(firstA),
       sortIntersectionSet(sortset1.rest(), sortset2.rest())
     )
   }
@@ -214,27 +219,32 @@ function sortIntersectionSet(sortset1, sortset2) {
   )
 }
 
+// 排序集合的并集
+// 练习2.62
 function sortUnionSet(sortset1, sortset2) {
   if (sortset1.isEmpty()) return sortset2
 
   if (sortset2.isEmpty()) return sortset1
 
   if (sortset1.first() === sortset2.first()) {
-    return sortUnionSet(
-      sortset1.rest(),
-      sortset2.rest()
+    return Sets.join(
+      Sets.toSets(sortset1.first()),
+      sortUnionSet(
+        sortset1.rest(),
+        sortset2.rest()
+      )
     )
   }
 
   if (sortset1.first() < sortset2.first()) {
     return Sets.join(
-      sortset1.first(),
+      Sets.toSets(sortset1.first()),
       sortUnionSet(sortset1.rest(), sortset2)
     )
   }
 
   return Sets.join(
-    sortset2.first(),
+    Sets.toSets(sortset2.first()),
     sortUnionSet(sortset1, sortset2.rest())
   )
 }
