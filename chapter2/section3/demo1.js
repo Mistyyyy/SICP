@@ -248,3 +248,7 @@ function sortUnionSet(sortset1, sortset2) {
     sortUnionSet(sortset1, sortset2.rest())
   )
 }
+
+module.exports = {
+  Sets
+}
