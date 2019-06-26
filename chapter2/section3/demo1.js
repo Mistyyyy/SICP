@@ -70,7 +70,7 @@ function deriv(exp, vars) {
 /** 
  * @param ele @type: @iterable 
 */
-function Sets(ele) {
+function Sets(ele = []) {
   this.element = [...ele];
 }
 
@@ -154,16 +154,16 @@ function intersectionSet(set1, set2, ) {
 
 // 并集
 // 练习2.59
-function unionSet(set1, set2) {
-  if (set1.isEmpty()) return set2
+function unionSet(set1, set2, res = new Sets()) {
+  if (set1.isEmpty()) return Sets.join(res, set2)
 
-  if (set2.isEmpty()) return set1
+  if (set2.isEmpty()) return Sets.join(set1, res)
 
   if (elementOfSet(set2.first(), set1)) {
-    return unionSet(set1, set2.rest())
+    return unionSet(set1, set2.rest(), res)
   }
 
-  return unionSet(set1.add(set2.first()), set2.rest())
+  return unionSet(set1, set2.rest(), res.add(set2.first()))
 }
 
 
@@ -250,5 +250,5 @@ function sortUnionSet(sortset1, sortset2) {
 }
 
 module.exports = {
-  Sets
+  Sets, unionSet
 }
