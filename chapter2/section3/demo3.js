@@ -4,6 +4,8 @@
  * 
  * 编码树的叶子节点，即字符和权重，权重也就是相对频度，这是造编码树的过程中需要用到的。
  * 
+ * @summary: 以下完备的实现了Huffman编码树的细节
+ * 
 */
 
 const { Sets, unionSet } = require('./demo1');
@@ -132,7 +134,9 @@ function findStartStringLen(message, set) {
 }
 
 /** 
- * 应该使用正确的思想，正确的思路，精简合理高效的解决问题。
+ * 
+ * @todo:
+ * 应该使用正确的思想，正确的思路，精简合理高效的方法解决问题。
  * 
  * 对已经给出的字段频率进行编码，Huffman树已经生成，但是不能仅仅局限在单字节。
  * 现在我们需要对多字节进行编码，这就相当于
@@ -143,7 +147,7 @@ function findStartStringLen(message, set) {
  * 
  * @question
  * 1. 这里面衍射出两个问题，第一: 假定需要编码的文本是英文字符，是否需要对英文的大小写作出区分编码。如果对大小写区分，那么词频分布会呈现指数级的增长
- * 如果不需要，那么如何取保解码后的文本，跟愿文本一致。
+ * 如果不需要，那么如何取保解码后的文本，跟原文本一致。
  * 
  * 2. 对于最常用的字符和最不常用的字符，其编码的过程中，随着词频的分布扩大，增长的数量级呈现什么样的增长情况。
  * 
@@ -215,19 +219,20 @@ const sing = [
   ['YIP', 9],
   ['JOB', 2],
   ['WAH', 1],
-  [' ', 30]
+  [' ', 30],
+  ['\n', 5]
 ]
 
 const singTree = new HuffmanTree(sing);
 
-const sings = `
-  GET A JOB
+// 经过Huffman压缩为193个比特位即24个字节，如果按照定长字节编码则需要136个字节，压缩效率在6倍左右，且这是按照utf-8传输的情况下
+// utf-16 的情况下差距是11倍左右
+const sings = `  GET A JOB
   SHA NA NA NA NA NA NA NA NA
   GET A JOB
   SHA NA NA NA NA NA NA NA NA
   WAH YIP YIP YIP YIP YIP YIP YIP YIP YIP
-  SHA BOOM
-`
+  SHA BOOM`
 
 const singBit = encode(sings, singTree);
 
