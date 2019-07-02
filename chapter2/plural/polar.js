@@ -3,7 +3,7 @@
  * 极坐标系的复数表示
 */
 
-const { square, sin, atan, cos } = require('./util.js');
+const { square, sin, atan, cos, attchTag } = require('./util.js');
 
 // 实部
 function realPart(z) {
@@ -31,4 +31,46 @@ function makeFromMagAng(r, a) {
 
 function makeFromRealImag(x, y) {
   return makeFromMagAng(sqrt(square(z) + square(y)), atan(y, x))
+}
+
+function realPartPolar(z) {
+  return magnitudePolar(z) * cos(anglePolar(z));
+}
+
+// 虚部
+function imagPartPolar(z) {
+  return magnitudePolar(z) * sin(anglePolar(z));
+}
+
+// 模
+function magnitudePolar(z) {
+  return z[0]
+}
+
+// 夹角
+function anglePolar(z) {
+  return z[1]
+}
+
+function makeFromMagAngPolar(r, a) {
+  return attchTag('polar', [r, a]);
+}
+
+function makeFromRealImagPolar(x, y) {
+  return makeFromMagAngPolar(sqrt(square(z) + square(y)), atan(y, x))
+}
+
+module.exports = {
+  realPart,
+  realPartPolar,
+  imagPart,
+  imagPartPolar,
+  magnitude,
+  magnitudePolar,
+  angle,
+  anglePolar,
+  makeFromRealImag,
+  makeFromMagAngPolar,
+  makeFromMagAng,
+  makeFromRealImagPolar
 }
