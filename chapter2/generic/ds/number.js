@@ -17,6 +17,12 @@ map.set('number', {
   },
   div(x, y) {
     return number(contents(x) / contents(y));
+  },
+  equ(x, y) {
+    return contents(x) === contents(y);
+  },
+  equZero(x) {
+    return contents(x) === 0;
   }
 })
 

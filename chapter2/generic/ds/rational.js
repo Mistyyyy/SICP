@@ -72,5 +72,14 @@ map.set('rational', {
       'rational',
       divRat(contents(x), contents(y))
     );
+  },
+  equ(x, y) {
+    const firstContent = contents(x);
+    const secondContent = contents(y);
+    return numer(firstContent) / denom(firstContent) === numer(secondContent) / denom(secondContent)
+  },
+  equZero(x) {
+    const content = contents(x);
+    return numer(content) === 0 || denom(content) === 0
   }
 })

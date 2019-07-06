@@ -11,27 +11,46 @@ const { map } = require('./map');
 const { typeTag } = require('./util');
 
 function add(x, y) {
-  const tag = typeTag(x);
-  const target = map.get(tag);
+  const firstTag = typeTag(x);
+  const secondTag = typeTag(y);
+  const target = map.get(firstTag);
   return target.add(x, y);
 }
 
 function sub(x, y) {
-  const tag = typeTag(x);
-  const target = map.get(tag);
+  const firstTag = typeTag(x);
+  const secondTag = typeTag(y);
+  const target = map.get(firstTag);
   return target.sub(x, y);
 }
 
 function mul(x, y) {
-  const tag = typeTag(x);
-  const target = map.get(tag);
+  const firstTag = typeTag(x);
+  const secondTag = typeTag(y);
+  const target = map.get(firstTag);
   return target.mul(x, y);
 }
 
 function div(x, y) {
+  const firstTag = typeTag(x);
+  const secondTag = typeTag(y);
+  const target = map.get(firstTag);
+  return target.div(x, y);
+}
+
+function equ(x, y) {
+  const firstTag = typeTag(x);
+  const secondTag = typeTag(y);
+  const target = map.get(firstTag);
+  return firstTag === secondTag
+    ? target.equ(x, y)
+    : false
+}
+
+function equZero(x) {
   const tag = typeTag(x);
   const target = map.get(tag);
-  return target.div(x, y);
+  return target.equZero(x); 
 }
 
 module.exports = {
@@ -42,5 +61,7 @@ module.exports = {
   makeComplexFromRealImag,
   makeComplexFromMagAng,
   number,
-  rational
+  rational,
+  equ,
+  equZero
 }

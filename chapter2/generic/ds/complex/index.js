@@ -36,6 +36,16 @@ map.set('complex', {
       magnitude(x) / magnitude(y),
       angle(x) - angle(y)
     )
+  },
+  equ(a, b) {
+    const x = contents(a);
+    const y = contents(b);
+
+    return realPart(x) === realPart(y) && imagPart(x) === imagPart(y)
+  },
+  equZero(a) {
+    const content = contents(a);
+    return realPart(content) === 0 || imagPart(content) === 0
   }
 });
 
