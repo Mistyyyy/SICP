@@ -16,5 +16,5 @@ function deriv(exp, vari) {
 }
 
 module.exports = {
-  deriv
+  deriv,
 }
