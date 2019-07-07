@@ -76,7 +76,7 @@ map.set('rational', {
   equ(x, y) {
     const firstContent = contents(x);
     const secondContent = contents(y);
-    return numer(firstContent) / denom(firstContent) === numer(secondContent) / denom(secondContent)
+    return (numer(firstContent) / denom(firstContent)) === (numer(secondContent) / denom(secondContent))
   },
   equZero(x) {
     const content = contents(x);
