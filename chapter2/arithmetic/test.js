@@ -17,14 +17,9 @@ const ce1 = new Certesian(3, 1);
 const ce2 = new Certesian(3, 2);
 const ce3 = new Certesian(10, 1);
 
-console.log(ce1)
-
 const c1 = new Complex(ce1);
 const c2 = new Complex(ce2);
-// const c3 = new Complex(ce3);
-
-console.log(c1)
 
 const res = add(c1, c2);
 
-// console.log(res)
+console.log(res)
