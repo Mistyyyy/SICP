@@ -19,6 +19,20 @@ class Scheme {
     return num.value === 0;
   }
 
+  static take(values) {
+    const [first, second] = values;
+
+    if (second === undefined) {
+      return new Scheme(first);
+    } else {
+      return new Scheme((first / second));
+    }
+  } 
+
+  raise() {
+    return [this.value];
+  }
+
   equ(num) {
     return Scheme.equ(this, num);
   }

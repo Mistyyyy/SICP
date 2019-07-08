@@ -10,6 +10,15 @@ class Certesian {
     this.magnitude = sqrt(square(this.realPart) + square(this.imagPart));
     this.angle = atan(this.imagPart, this.realPart) 
   }
+
+  static take(values) {
+    const [realPart, imagPart = 0] = values;
+    return new Certesian(realPart, imagPart);
+  }
+
+  raise() {
+    return this;
+  }
 }
 
 map.set('Certesian', Certesian);

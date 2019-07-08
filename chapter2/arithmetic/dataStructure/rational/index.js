@@ -6,7 +6,7 @@ const { checkSelf } = require('../../util/selfCheck');
 const { register } = require('../../store/register');
 
 class Rational {
-  constructor(numer, demon) {
+  constructor(numer, demon = new Int(1)) {
     assert(numer instanceof Int, `The argument ${numer} must be an Int Type, please check it`);
     assert(demon instanceof Int, `The argument ${demon} must be an Int Type, please check it`);
     assert(demon.value !== 0, `The argument ${demon} cant not be zero, please check it`);
@@ -50,6 +50,10 @@ class Rational {
     return Rational.equZero(this);
   }
 
+  raise() {
+    return [this.numer, this.demon];
+  }
+
   static equ(rational1, rational2) {
     this.checkSelf(rational1, rational2);
     const res = rational1.div(rational2);
@@ -59,6 +63,11 @@ class Rational {
   static equZero(rational) {
     this.checkSelf(rational);
     return rational.numer === 0;
+  }
+
+  static take(values) {
+    const [first, second = 1] = values;
+    return new Rational(new Int(first), new Int(second));
   }
 }
 

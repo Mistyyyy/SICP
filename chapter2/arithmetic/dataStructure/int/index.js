@@ -2,6 +2,9 @@ const { assert } = require('../../util/assert');
 const { checkSelf } = require('../../util/selfCheck');
 const { register } = require('../../store/register');
 
+/** 
+ * Int 的raise只提供一个 value
+*/
 class Int {
   constructor(value) {
     const val = Number(value);
@@ -46,6 +49,10 @@ class Int {
   div(num) {
     Int.checkSelf(num);
     return new Int(this.value / num.value);
+  }
+
+  raise() {
+    return [this.value];
   }
 }
 

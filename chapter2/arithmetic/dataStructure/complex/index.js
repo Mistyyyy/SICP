@@ -17,6 +17,7 @@ class Complex {
   add(complex) {
     Complex.checkSelf(complex);
     const Certesian = require('../../store').get('Certesian');
+    console.log(this.imagPart, complex.imagPart);
     return new Complex(new Certesian(this.realPart + complex.realPart, this.imagPart + complex.imagPart));
   }
 
@@ -47,14 +48,17 @@ class Complex {
   }
 
   static equ(complex1, complex2) {
-    this.checkSelf(complex1);
-    this.checkSelf(complex2);
+    this.checkSelf(complex1, complex2);
     return complex1.realPart === complex2.realPart && complex1.imagPart === complex2.imagPart;
   }
 
   static equZero(complex) {
     this.checkSelf(complex);
     return complex.realPart === 0;
+  }
+
+  static take(value) {
+    return new Complex(value);
   }
 }
 
