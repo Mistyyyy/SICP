@@ -20,17 +20,26 @@ class Scheme {
   }
 
   static take(values) {
-    const [first, second] = values;
-
-    if (second === undefined) {
-      return new Scheme(first);
-    } else {
-      return new Scheme((first / second));
+    if (values) {
+      const [first, second] = values;
+      if (second === undefined || second === 0) {
+        return new Scheme(first);
+      } else {
+        return new Scheme((first / second));
+      }
     }
   } 
 
   raise() {
     return [this.value];
+  }
+
+  down() {
+    if (this.value === parseInt(this.value)) {
+      return [this.value];
+    } else {
+      return false;
+    }
   }
 
   equ(num) {

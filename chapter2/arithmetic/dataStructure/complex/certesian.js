@@ -12,12 +12,22 @@ class Certesian {
   }
 
   static take(values) {
-    const [realPart, imagPart = 0] = values;
-    return new Certesian(realPart, imagPart);
+    if (values) {
+      const [realPart, imagPart = 0] = values;
+      return new Certesian(realPart, imagPart);
+    }
   }
 
   raise() {
     return this;
+  }
+
+  down() {
+    if (this.imagPart === 0) {
+      return [this.realPart, this.imagPart];
+    } else {
+      return false;
+    }
   }
 }
 

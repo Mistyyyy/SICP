@@ -47,6 +47,14 @@ class Complex {
     return Complex.equZero(this);
   }
 
+  down() {
+    if (this.imagPart === 0) {
+      return [this.realPart, this.imagPart];
+    } else {
+      return false;
+    }
+  }
+
   static equ(complex1, complex2) {
     this.checkSelf(complex1, complex2);
     return complex1.realPart === complex2.realPart && complex1.imagPart === complex2.imagPart;

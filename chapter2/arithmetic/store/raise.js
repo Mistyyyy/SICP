@@ -111,8 +111,24 @@ function raise(arg1, arg2) {
   return [res1, res2];
 }
 
+// 明显是一个递归式
+// 终止条件是当 args.down() 为false 或者 args.constructor.prev 为null的时候
 function down(args) {
+  function autoDown(args) {
+    const prev = args.constructor.prev;
+    const newArgs = args.down();
 
+    if (!newArgs) {
+      return args;
+    }
+
+    if (!prev) {
+      return args;
+    }
+    const passArgs = prev.take(newArgs);
+    return autoDown(passArgs);
+  }
+  return autoDown(args);
 }
 
 module.exports = {

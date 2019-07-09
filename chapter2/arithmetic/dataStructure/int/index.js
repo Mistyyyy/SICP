@@ -23,6 +23,13 @@ class Int {
     return num.value === 0;
   }
 
+  static take(values) {
+    if (values) {
+      const [head] = values;
+      return new Int(head)
+    }
+  }
+
   equ(num) {
     return Int.equ(this, num);
   }
@@ -52,6 +59,10 @@ class Int {
   }
 
   raise() {
+    return [this.value];
+  }
+
+  down() {
     return [this.value];
   }
 }

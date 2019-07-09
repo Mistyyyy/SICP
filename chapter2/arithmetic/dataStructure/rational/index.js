@@ -54,6 +54,14 @@ class Rational {
     return [this.numer, this.demon];
   }
 
+  down() {
+    if (this.demon === 1)  {
+      return [this.numer];
+    } else {
+      return false;
+    }
+  }
+
   static equ(rational1, rational2) {
     this.checkSelf(rational1, rational2);
     const res = rational1.div(rational2);
