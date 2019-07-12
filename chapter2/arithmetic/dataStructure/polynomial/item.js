@@ -1,6 +1,7 @@
 const { checkSelf } = require('../../util/selfCheck');
 const { register } = require('../../store/register');
 const { assert } = require('../../util/assert');
+const { add, mul } = require('../../index');
 
 class Item {
   constructor(args) {
@@ -27,7 +28,7 @@ class Item {
     for (const [order, coff] of item.value.entries()) {
       let res = maps.get(order);
       if (res) {
-        maps.set(order, res + coff);
+        maps.set(order, add(res, coff));
       } else {
         maps.set(order, coff);
       }
@@ -43,9 +44,9 @@ class Item {
     orders.forEach(i => {
       anoOrders.forEach(ano => {
         const totalOrder = i + ano;
-        const resCof = this.value.get(i) * item.value.get(ano);
+        const resCof = mul(this.value.get(i), item.value.get(ano));
         if (res.get(totalOrder)) {
-          res.set(totalOrder, res.get(totalOrder) + resCof);
+          res.set(totalOrder, add(res.get(totalOrder), resCof));
         } else {
           res.set(totalOrder, resCof);
         }
@@ -56,7 +57,7 @@ class Item {
 
   static empty(item) {
     this.checkSelf(item);
-    const values = item.value.values();
+    const values = item.coffs();
     return values.length === 0 || (values.length === 1 && !!values[0])
   }
 }
