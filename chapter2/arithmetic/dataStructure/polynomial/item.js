@@ -1,6 +1,6 @@
 const { checkSelf } = require('../../util/selfCheck');
 const { assert } = require('../../util/assert');
-const { add, mul } = require('../../index');
+const { add, mul, sub } = require('../../index');
 
 class Item {
   constructor(args) {
@@ -35,6 +35,20 @@ class Item {
     return new Item(maps);
   }
 
+  sub(item) {
+    Item.checkSelf(item);
+    const maps = new Map(this.value);
+    for (const [order, coff] of item.value.entries()) {
+      let res = maps.get(order);
+      if (res) {
+        maps.set(order, sub(res, coff));
+      } else {
+        maps.set(order, coff);
+      }
+    }
+    return new Item(maps);
+  }
+
   mul (item) {
     Item.checkSelf(item);
     const res = new Map();
@@ -52,6 +66,10 @@ class Item {
       })
     })
     return new Item(res);
+  }
+
+  div(item) {
+    
   }
 
   static empty(item) {

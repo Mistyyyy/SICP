@@ -36,6 +36,10 @@ class Poly {
     )
   }
 
+  sub(poly) {
+    Poly.isSameVariable(this, poly);
+  }
+
   mul(poly) {
     Poly.isSameVariable(this, poly);
 
@@ -44,6 +48,10 @@ class Poly {
       this.getVariable()
     )
   }
+
+  div(poly) {
+    Poly.isSameVariable(this, poly);
+  } 
 }
 
 Poly.isSameVariable = function(...args) {

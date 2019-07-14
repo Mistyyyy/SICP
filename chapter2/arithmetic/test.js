@@ -24,6 +24,7 @@ insertAfter(Scheme, Rational);
 const i1 = new Int(1);
 const i2 = new Int(2);
 const i3 = new Int(3);
+const i4 = new Int(4);
 const i5 = new Int(5);
 const it1 = new Item([[2,i3]]);
 const it2 = new Item([[1,i2]]);
@@ -40,8 +41,9 @@ const a2 = po3.add(po4);
 
 // const mul1 = a1.mul(a2);
 
-// const r1 = new Rational(i1, i2);
+const r1 = new Rational(i1, i2);
 const r2 = new Rational(i1, i3);
+const r4 = new Rational(i1, i4);
 const ce1 = new Certesian(3, 1);
 const ce2 = new Certesian(3, -1);
 const ce3 = new Certesian(10.3, 0);
@@ -49,10 +51,10 @@ const ce3 = new Certesian(10.3, 0);
 const c1 = new Complex(ce1);
 const c2 = new Complex(ce2);
 
-// const res = add(a1, a2);
+const resa = add(r4, r4);
 const res = mul(a1, a2);
 
-console.log(res)
+console.log(resa)
 // const res1 = add(c1, c2);
 
 // console.log(down(res), down(ce3))

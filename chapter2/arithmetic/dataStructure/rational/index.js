@@ -1,6 +1,7 @@
 // 有理数的分子分母
 // 可以表达为两个整数比的数(a/b b !== 0)被定义为有理数
 const { assert } = require('../../util/assert');
+const { gcd } = require('../../util/gcd');
 const { checkSelf } = require('../../util/selfCheck');
 
 
@@ -13,35 +14,56 @@ class Rational {
     assert(numer instanceof Int, `The argument ${numer} must be an Int Type, please check it`);
     assert(demon instanceof Int, `The argument ${demon} must be an Int Type, please check it`);
     assert(demon.value !== 0, `The argument ${demon} cant not be zero, please check it`);
-    this.numer = numer.value;
-    this.demon = demon.value;
+    const gcds = gcd(numer.value, demon.value);
+    this.numer = numer.value / gcds;
+    this.demon = demon.value / gcds;
   }
 
   add(rational) {
+    const Int = require('../../store/container').get('Int');
+
     Rational.checkSelf(rational);
-    const numer = new Int(this.numer * rational.demon + this.demon * rational.numer);
-    const demon = new Int(this.demon * rational.demon);
+    const numers = this.numer * rational.demon + this.demon * rational.numer;
+    const demons = this.demon * rational.demon;
+    const gcds = gcd(numers, demons);
+    const numer = new Int(numers / gcds);
+    const demon = new Int(demons / gcds);
     return new Rational(numer, demon);
   }
 
   sub(rational) {
+    const Int = require('../../store/container').get('Int');
+
     Rational.checkSelf(rational);
-    const numer = new Int(this.numer * rational.demon - this.demon * rational.numer);
-    const demon = new Int(this.demon * rational.demon);
+    const numers = this.numer * rational.demon - this.demon * rational.numer;
+    const demons = this.demon * rational.demon;
+    const gcds = gcd(numers, demons);
+    const numer = new Int(numers / gcds);
+    const demon = new Int(demons / gcds);
     return new Rational(numer, demon);
   }
 
   mul(rational) {
+    const Int = require('../../store/container').get('Int');
+
     Rational.checkSelf(rational);
-    const numer = new Int(this.numer * rational.numer);
-    const demon = new Int(this.demon * rational.demon);
+    const numers = this.numer * rational.numer
+    const demons = this.demon * rational.demon
+    const gcds = gcd(numers, demons);
+    const numer = new Int(numers / gcds);
+    const demon = new Int(demons / gcds);
     return new Rational(numer, demon);
   }
 
   div(rational) {
+    const Int = require('../../store/container').get('Int');
+
     Rational.checkSelf(rational);
-    const numer = new Int(this.numer * rational.demon);
-    const demon = new Int(this.demon * rational.numer);
+    const numers = this.numer * rational.demon;
+    const demons = this.demon * rational.numer;
+    const gcds = gcd(numers, demons);
+    const numer = new Int(numers / gcds);
+    const demon = new Int(demons / gcds);
     return new Rational(numer, demon);
   }
 
