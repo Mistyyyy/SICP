@@ -1,5 +1,4 @@
 const { checkSelf } = require('../../util/selfCheck');
-const { register } = require('../../store/register');
 const { assert } = require('../../util/assert');
 const { add, mul } = require('../../index');
 
@@ -63,4 +62,7 @@ class Item {
 }
 
 checkSelf(Item);
-register(Item);
+
+module.exports = {
+  Item
+}

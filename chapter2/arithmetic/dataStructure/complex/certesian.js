@@ -1,7 +1,5 @@
 const { atan, sqrt, square } = require('../../util/math');
 const { map } = require('./map');
-const { register } = require('../../store/register');
-
 
 class Certesian {
   constructor(realPart, imagPart) {
@@ -32,4 +30,7 @@ class Certesian {
 }
 
 map.set('Certesian', Certesian);
-register(Certesian);
+
+module.exports = {
+  Certesian
+}

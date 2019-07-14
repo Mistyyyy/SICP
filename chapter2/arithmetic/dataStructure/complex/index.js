@@ -1,8 +1,6 @@
 const { map } = require('./map');
 const { assert } = require('../../util/assert');
 const { checkSelf } = require('../../util/selfCheck');
-const { register } = require('../../store/register');
-
 class Complex {
   constructor(complex) {
     const constructorName = complex.constructor.name;
@@ -72,4 +70,6 @@ class Complex {
 
 checkSelf(Complex);
 
-register(Complex);
+module.exports = {
+  Complex
+}

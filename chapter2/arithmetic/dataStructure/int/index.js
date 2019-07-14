@@ -1,7 +1,5 @@
 const { assert } = require('../../util/assert');
 const { checkSelf } = require('../../util/selfCheck');
-const { register } = require('../../store/register');
-
 /** 
  * Int 的raise只提供一个 value
 */
@@ -69,4 +67,6 @@ class Int {
 
 checkSelf(Int);
 
-register(Int);
+module.exports = {
+  Int
+}

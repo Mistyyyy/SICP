@@ -1,10 +1,15 @@
 const { add, mul } = require('./index');
 const DS = require('./store');
-require('./dataStructure/scheme');
-require('./dataStructure/polynomial');
-require('./dataStructure/polynomial/item');
+const scheme = require('./dataStructure/scheme').Scheme;
+const poly = require('./dataStructure/polynomial').Poly;
+const item = require('./dataStructure/polynomial/item').Item;
+const { register } = require('./store/register');
+
+register(scheme, poly, item);
+
 const { insertAfter, down } = require('./store/raise');
 
+console.log(DS.keys())
 const Int = DS.get('Int');
 const Rational = DS.get('Rational');
 const Certesian = DS.get('Certesian');
@@ -12,6 +17,7 @@ const Complex = DS.get('Complex');
 const Scheme = DS.get('Scheme');
 const Item = DS.get('Item');
 const Poly = DS.get('Poly');
+
 
 insertAfter(Scheme, Rational);
 
@@ -34,7 +40,7 @@ const a2 = po3.add(po4);
 
 // const mul1 = a1.mul(a2);
 
-const r1 = new Rational(i1, i2);
+// const r1 = new Rational(i1, i2);
 const r2 = new Rational(i1, i3);
 const ce1 = new Certesian(3, 1);
 const ce2 = new Certesian(3, -1);

@@ -1,12 +1,15 @@
 // 有理数的分子分母
 // 可以表达为两个整数比的数(a/b b !== 0)被定义为有理数
-const Int = require('../../store/container').get('Int');
 const { assert } = require('../../util/assert');
 const { checkSelf } = require('../../util/selfCheck');
-const { register } = require('../../store/register');
+
 
 class Rational {
-  constructor(numer, demon = new Int(1)) {
+  constructor(numer, demon) {
+    const Int = require('../../store/container').get('Int');
+    if (!demon) {
+      demon  = new Int(1);
+    }
     assert(numer instanceof Int, `The argument ${numer} must be an Int Type, please check it`);
     assert(demon instanceof Int, `The argument ${demon} must be an Int Type, please check it`);
     assert(demon.value !== 0, `The argument ${demon} cant not be zero, please check it`);
@@ -81,4 +84,6 @@ class Rational {
 
 checkSelf(Rational);
 
-register(Rational);
+module.exports = {
+  Rational
+}

@@ -1,6 +1,5 @@
 const { assert } = require('../../util/assert');
 const { checkSelf } = require('../../util/selfCheck');
-const { register } = require('../../store/register');
 
 class Scheme {
   constructor(value) {
@@ -72,4 +71,7 @@ class Scheme {
 }
 
 checkSelf(Scheme);
-register(Scheme);
+
+module.exports = {
+  Scheme
+}

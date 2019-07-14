@@ -11,8 +11,6 @@
 
 const { assert } = require('../../util/assert');
 const { checkSelf } = require('../../util/selfCheck');
-const { register } = require('../../store/register');
-
 
 class Poly {
   constructor(term, variable) {
@@ -58,4 +56,6 @@ Poly.isSameVariable = function(...args) {
 
 checkSelf(Poly);
 
-register(Poly);
+module.exports = {
+  Poly
+}

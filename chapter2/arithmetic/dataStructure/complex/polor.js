@@ -1,6 +1,5 @@
 const { cos, sin } = require('../../util/math');
 const { map } = require('./map');
-const { register } = require('../../store/register');
 
 class Polor {
   constructor([magnitude, angle]) {
@@ -12,4 +11,7 @@ class Polor {
 }
 
 map.set('Polor', Polor);
-register(Polor);
+
+module.exports = {
+  Polor
+}
