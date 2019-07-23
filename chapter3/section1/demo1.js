@@ -63,6 +63,23 @@ function makeAccount(balance, secret) {
   }
 }
 
+function makeJoint(account, password, newpassword) {
+  return {
+    withraw(secret, numbers) {
+      if (secret !==  newpassword) {
+        throw new Error('Incorrect passwords');
+      }
+      return account.withraw(password, numbers);
+    },
+    dispoist(secret, numbers) {
+      if (secret !==  newpassword) {
+        throw new Error('Incorrect passwords');
+      }
+      return account.dispoist(password, numbers);
+    }
+  }
+}
+
 /** 
  * 赋值和局部状态
  * 练习3.6
