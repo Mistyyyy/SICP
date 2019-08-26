@@ -9,7 +9,6 @@ register(scheme, poly, item);
 
 const { insertAfter, down } = require('./store/raise');
 
-console.log(DS.keys())
 const Int = DS.get('Int');
 const Rational = DS.get('Rational');
 const Certesian = DS.get('Certesian');
@@ -17,7 +16,6 @@ const Complex = DS.get('Complex');
 const Scheme = DS.get('Scheme');
 const Item = DS.get('Item');
 const Poly = DS.get('Poly');
-
 
 insertAfter(Scheme, Rational);
 

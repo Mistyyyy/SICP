@@ -27,7 +27,6 @@ function insertBefore(insert, next) {
   }
 }
 
-
 // 先解决优先级问题，即不同的层次结构中，哪一个数据结构的优先级高？
 // 两个数据中肯定有优先级高的一个，这时候，解决方法是两边数据结构向中间靠拢
 // 即一个取 prev，一个取 next 
@@ -96,9 +95,6 @@ function raiseTo(lower, higher) {
   }
   return [target, higher];
 }
-
-
-
 
 function raise(arg1, arg2) {
   const lower = takeHighLevel(arg1, arg2);

@@ -1,4 +1,4 @@
-const { factorialIter } = require('./demo2.js');
+// const { factorialIter } = require('./demo2.js');
 
 // 树形递归
 
@@ -33,13 +33,50 @@ function fibn(n) {
 
 // 换零钱的求值方式
 // 递归
-function countChange(amount) {
-
+let calls = 0;
+function fastCountChange(amount) {
+  const map = new Map();
   function cc(amount, kindCoins) {
+    calls++;
+    if (amount === 0 ) return 1;
+    if (amount < 0 || kindCoins === 0) return 0;
+    if (!map.has(`${amount}-${kindCoins}`)) {
+      const res = cc(amount, kindCoins - 1)
+        + cc((amount - getOneCoin(kindCoins)), kindCoins);
+      map.set(`${amount}-${kindCoins}`, res);
+    }
+    return map.get(`${amount}-${kindCoins}`);
+  }
+
+  function getOneCoin(kind) {
+    switch(kind) {
+      case 1: 
+        return 1;
+        break;
+      case 2:
+        return 5;
+        break;
+      case 3:
+        return 10;
+        break;
+      case 4: 
+        return 25;
+        break;
+      case 5:
+        return 50;
+        break;
+    }
+  }
+  return cc(amount, 5);
+}
+let callNum = 0;
+function countChange(amount) {
+  function cc(amount, kindCoins) {
+    callNum++;
     if (amount === 0 ) return 1;
     if (amount < 0 || kindCoins === 0) return 0;
     return cc(amount, kindCoins - 1)
-      + cc((amount - getOneCoin(kindCoins)), kindCoins);
+    + cc((amount - getOneCoin(kindCoins)), kindCoins);
   }
 
   function getOneCoin(kind) {
@@ -66,67 +103,79 @@ function countChange(amount) {
 
 // 迭代
 
-function countChangei(amount) {
-  let obj = {
-    n1: [],
-    n2: [],
-    n3: [],
-    n4: [],
-    n5: [],
-  }
-  const temp = (n) => 'n' + n;
-  // const isPrevHas(index, nowCount)
-  function ccIter(amount, sum, count, currentCount) {
-    console.log(obj)
-    if (currentCount <= count) {
-      if (currentCount === 1) {
-        for(let i = amount; i >= 1; i--) obj[temp(currentCount)][i] = 1;
-        sum++;
-        debugger
-      } else {
-        for(let i = amount - getOneCoin(currentCount); i >=0; i-=getOneCoin(currentCount)) {
-          for (let j = 1; j < currentCount; j++) {
-            if (obj[temp(j)][i]) {
-              obj[temp(currentCount)][amount-i] = 1;
-              sum++;
-            }
-          }
-          if (i === 0) {
-            obj[temp(currentCount)][amount-i] = 1;
-            sum++;
-          }
-        }
-      }
-      return ccIter(amount, sum, count, ++currentCount)
-    } else {
-      return sum
-    }
-    return ccIter(amount, 0, 5, 1)
-  }
+// function countChangei(amount) {
+//   let obj = {
+//     n1: [],
+//     n2: [],
+//     n3: [],
+//     n4: [],
+//     n5: [],
+//   }
+//   const temp = (n) => 'n' + n;
+//   // const isPrevHas(index, nowCount)
+//   function ccIter(amount, sum, count, currentCount) {
+//     console.log(obj)
+//     if (currentCount <= count) {
+//       if (currentCount === 1) {
+//         for(let i = amount; i >= 1; i--) obj[temp(currentCount)][i] = 1;
+//         sum++;
+//         debugger
+//       } else {
+//         for(let i = amount - getOneCoin(currentCount); i >=0; i-=getOneCoin(currentCount)) {
+//           for (let j = 1; j < currentCount; j++) {
+//             if (obj[temp(j)][i]) {
+//               obj[temp(currentCount)][amount-i] = 1;
+//               sum++;
+//             }
+//           }
+//           if (i === 0) {
+//             obj[temp(currentCount)][amount-i] = 1;
+//             sum++;
+//           }
+//         }
+//       }
+//       return ccIter(amount, sum, count, ++currentCount)
+//     } else {
+//       return sum
+//     }
+//     return ccIter(amount, 0, 5, 1)
+//   }
 
-  function getOneCoin(kind) {
-    switch(kind) {
-      case 1: 
-        return 1;
-        break;
-      case 2:
-        return 5;
-        break;
-      case 3:
-        return 10;
-        break;
-      case 4: 
-        return 25;
-        break;
-      case 5:
-        return 50;
-        break;
-    }
-  }
-  return ccIter(amount, 0, 5, 1);
-}
+//   function getOneCoin(kind) {
+//     switch(kind) {
+//       case 1: 
+//         return 1;
+//         break;
+//       case 2:
+//         return 5;
+//         break;
+//       case 3:
+//         return 10;
+//         break;
+//       case 4: 
+//         return 25;
+//         break;
+//       case 5:
+//         return 50;
+//         break;
+//     }
+//   }
+//   return ccIter(amount, 0, 5, 1);
+// }
 console.time();
-// console.log(countChange(1000))
+const amount = 100;
+const res = fastCountChange(amount);
+console.log(`The amount is: ${amount}`);
+
+console.log(`
+Fast Version -> The func calls is: ${calls},
+Fast Version -> The result is: ${res}
+`)
+const res1 = countChange(amount);
+console.log(`
+Common Version -> The func calls is: ${callNum},
+Common Version -> The result is: ${res1}
+`)
 console.timeEnd();
 
 // 练习1.11
@@ -177,4 +226,4 @@ function getPascali(row, col) {
   return factorialIter(row) / (factorialIter(col) * factorialIter(row-col))
 }
 
-console.log(getPascali(3,2));
+// console.log(getPascali(3,2));
